@@ -48,7 +48,7 @@ def add_item(consumer_key, access_token, item_url):
 
     headers = {'X-Accept': 'application/json'}
     data = {"url": item_url,
-            "tags": "p2k",
+            "tags": "k2p",
             "consumer_key": consumer_key,
             "access_token": access_token}
     response = requests.post(url=url, headers=headers, data=data)
@@ -60,4 +60,6 @@ rt = get_request_token()
 print(rt)
 at = get_access_token(rt)['access_token']
 print(at)
-add_item(consumer_key, at, r'http://coderg.herokuapp.com')
+with open('file.txt', 'a') as f:
+    f.write(rt + '\t' + at + '\n')
+add_item(consumer_key, at, r'https://coderg.herokuapp.com')
