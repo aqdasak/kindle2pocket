@@ -56,10 +56,11 @@ def add_item(consumer_key, access_token, item_url):
     print(response.text)
 
 
-rt = get_request_token()
-print(rt)
-at = get_access_token(rt)['access_token']
-print(at)
-with open('file.txt', 'a') as f:
-    f.write(rt + '\t' + at + '\n')
-add_item(consumer_key, at, r'https://coderg.herokuapp.com')
+# rt = get_request_token()
+# print(rt)
+# at = get_access_token(rt)['access_token']
+# print(at)
+# with open('file.txt', 'a') as f:
+#     f.write(rt + '\t' + at + '\n')
+# add_item(consumer_key, at, r'https://coderg.herokuapp.com')
+add_item(consumer_key, '59b190fa-0ae2-dda1-5005-48dd04', r'https://coderg.herokuapp.com')

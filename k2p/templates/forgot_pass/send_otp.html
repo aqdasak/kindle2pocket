@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block head %}
+
+<title>Reset Password</title>
+
+</head>
+
+<body>
+
+    {% endblock %}
+
+    <!-- NAVBAR -->
+
+    {% block body %}
+
+    <h1>Reset Password</h1>
+
+
+    <!-- Flash messages -->
+    {% with messages=get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category,message in messages %}
+    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
+
+    Enter details.
+
+    <form action="{{ url_for('auth.reset_pass_otp') }}" method="POST">
+        Username: <input type="text" name="username">
+        <input type="reset" value="Reset">
+        <input type="submit" value="Submit">
+    </form>
+    
+    <br>
+    <h1>OR</h1>
+    <br>
+
+    <form action="{{ url_for('auth.reset_pass_otp') }}" method="POST">
+        Email: <input type="email" name="email">
+        <input type="reset" value="Reset">
+        <input type="submit" value="Submit">
+    </form>
+
+    {% endblock %}

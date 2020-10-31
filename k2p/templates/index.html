@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="{{url_for('static',filename='favicon_io/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{{url_for('static',filename='favicon_io/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{url_for('static',filename='favicon_io/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{url_for('static',filename='favicon_io/site.webmanifest')}}">
+
+    <title>K2P</title>
+
+</head>
+
+<body>
+
+
+    <!--########################-->
+    <div id="user">
+        email of logged in user via flask
+    </div>
+    <!--###########################-->
+
+
+    <span id="main_container">
+
+        <header>
+            <img id="p2k" src="{{url_for('static',filename='icons/p2k.png')}}">
+            <p>Save from kindle browser to your Pocket, for free.</p>
+            &nbsp;
+        </header>
+
+        <div id="login_container">
+            <form>
+                <input id="login" type="radio" name="tab" />
+                <label class="tab_label" for="login">log in</label>
+                <input id="signup" type="radio" name="tab" />
+                <label class="tab_label" for="signup">sign up</label>
+                <figure class="reveal_login">
+                    <p>Please log in with your account.</p>
+                    <input type="text" placeholder="user" />
+                    <input type="password" placeholder="password" />
+                    <input id="logged_in" type="checkbox" />
+                    <label class="content_label" for="logged_in">Keep me logged in</label>
+                    <input type="submit" value="Log in" />
+                </figure>
+                <figure class="reveal_signin">
+                    <p>You can register a new account.</p>
+                    <input type="text" placeholder="user" />
+                    <input type="password" placeholder="password" />
+                    <input type="submit" value="Sign up" />
+                </figure>
+            </form>
+        </div>
+
+        <footer>
+            <span>&copy 2020 aqdasak</span>
+            <span>
+                <a href="https://github.com/aqdasak" target="_blank"><img
+                        src="{{url_for('static', filename='icons/github.png')}}" alt="github" height="40px"></a>
+            
+                <a href="mailto:aqdasak@gmail.com"><img src="{{url_for('static', filename='icons/gmail.svg')}}"
+                        alt="mail" height="40px"></a>
+            </span>
+        </footer>
+</body>
+</html>

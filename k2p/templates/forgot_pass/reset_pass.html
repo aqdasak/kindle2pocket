@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block head %}
+
+<title>Reset Password</title>
+
+</head>
+
+<body>
+
+    {% endblock %}
+
+    <!-- NAVBAR -->
+
+    {% block body %}
+
+    <h1>Reset Password</h1>
+
+    OTP has been sent on your email.
+
+
+    <!-- Flash message -->
+    {% with messages=get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category,message in messages %}
+    <div class="after-del-msg" role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
+
+    <form action="{{ url_for('auth.reset_pass') }}" method="POST">
+
+        OTP: <input type="text" name="otp">
+        New Password: <input type="password" name="new_password1">
+        New Password: <input type="password" name="new_password2">
+        
+        <input type="hidden" name="username" value="{{ username }}">
+
+        <input type="reset" value="Reset">
+        <input type="submit" value="Submit">
+
+    </form>
+
+    {% endblock %}
