@@ -38,14 +38,14 @@
         </header>
 
         <div id="login_container">
-            <form>
+            <form action="{{ url_for('auth.login') }}" method="post">
                 <input id="login" type="radio" name="tab" />
                 <label class="tab_label" for="login">log in</label>
                 <input id="signup" type="radio" name="tab" />
                 <label class="tab_label" for="signup">sign up</label>
                 <figure class="reveal_login">
                     <p>Please log in with your account.</p>
-                    <input type="text" placeholder="user" />
+                    <input type="text" placeholder="email" />
                     <input type="password" placeholder="password" />
                     <input id="logged_in" type="checkbox" />
                     <label class="content_label" for="logged_in">Keep me logged in</label>
@@ -53,8 +53,9 @@
                 </figure>
                 <figure class="reveal_signin">
                     <p>You can register a new account.</p>
-                    <input type="text" placeholder="user" />
+                    <input type="text" placeholder="email" />
                     <input type="password" placeholder="password" />
+                    <input type="password" placeholder="confirm password" />
                     <input type="submit" value="Sign up" />
                 </figure>
             </form>

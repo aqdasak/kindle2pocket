@@ -1,4 +1,4 @@
-from k2p import create_app
+from kindle2pocket import create_app
 
 app = create_app()
 

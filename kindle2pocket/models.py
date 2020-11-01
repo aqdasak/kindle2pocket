@@ -4,9 +4,9 @@ from .extensions import db
 
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    # id = db.Column(db.Integer, primary_key=True)
 
-    email = db.Column(db.String(), unique=True, nullable=False)
+    email = db.Column(db.String(), primary_key=True)
     _hashed_password = db.Column(db.String(255), nullable=False, server_default='')
     access_token = db.Column(db.String(33))
 
