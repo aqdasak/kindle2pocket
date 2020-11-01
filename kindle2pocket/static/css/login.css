@@ -83,6 +83,7 @@ figure input::-webkit-input-placeholder {
 }
 
 figure input[type="text"],
+figure input[type="email"],
 figure input[type="password"] {
   width: 100%;
   padding: .5em;

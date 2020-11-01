@@ -9,22 +9,45 @@ from kindle2pocket.models import User
 auth = Blueprint('auth', __name__)
 
 
-@auth.route('/login', methods=['GET', 'POST'])
+@auth.route('/login', methods=['POST'])
 def login():
     if request.method == 'POST':
-        email = request.form.get('email').lower()
-        password = request.form.get('password')
+        login_email = request.form.get('login_email')
+        login_pass = request.form.get('login_pass')
 
-        user = User.query.filter_by(email=email).first()
+        signup_email = request.form.get('signup_email')
+        signup_pass1 = request.form.get('signup_pass1')
+        signup_pass2 = request.form.get('signup_pass2')
 
-        if user and check_password_hash(user.password, password):
-            session['user'] = email
-            return redirect(url_for('main.dashboard'))
-        else:
-            flash('Could not login. Please check and try again.')
-            return redirect(url_for('auth.login'))
+        if login_email:
+            login_email = login_email.lower()
+            user = User.query.filter_by(email=login_email).first()
 
-    return render_template(url_for('main.index'))
+            if user and check_password_hash(user.password, login_pass):
+                session['user'] = login_email
+            else:
+                flash('Could not login. Please check and try again.')
+
+        elif signup_email:
+            signup_email = signup_email.lower()
+            # checking against existing email
+            if User.query.filter_by(email=signup_email).first():
+                flash('Email already registered', 'danger')
+            else:
+                if signup_pass1 == signup_pass2:
+                    user = User(email=signup_email, password=signup_email)
+                    db.session.add(user)
+                    db.session.commit()
+
+                    # TO DO flash in html and dashboard change checking
+                    flash("Sign up completed", "success")
+                    # signing in
+                    session['user'] = signup_email
+                    return redirect(url_for('main.index'))
+                else:
+                    flash('Wrong values entered', "danger")
+
+        return redirect(url_for('main.index'))
 
 
 @auth.route('/logout/')
@@ -32,41 +55,39 @@ def logout():
     session.pop('user')
     return redirect(url_for('auth.login'))
 
-
-@auth.route("/signup/", methods=['GET', 'POST'])
-def signup():
-    # if user/admin already logged in
-    # then redirect to home or dashboard
-    if 'user' in session:
-        return redirect(url_for('main.dashboard'))
-
-    if request.method == 'POST':
-        email = request.form.get('email')
-        password1 = request.form.get('password1')
-        password2 = request.form.get('password2')
-
-        # checking against existing email
-        if User.query.filter_by(email=email).first():
-            error = 'Email already registered'
-        else:
-            if password1 == password2:
-                user = User(email=email, password=password1)
-                db.session.add(user)
-                db.session.commit()
-
-                # TO DO flash in html and dashboard change checking
-                flash("Sign up completed", "success")
-                # signing in
-                session['user'] = email
-                return redirect(url_for('main.dashboard'))
-            else:
-                flash('Wrong values entered', "danger")
-                # return redirect("/dashboard")
-
-
-        # return redirect("/dashboard")
-
-    return redirect(url_for('main.dashboard'))
+# @auth.route("/signup/", methods=['GET', 'POST'])
+# def signup():
+#     # if user/admin already logged in
+#     # then redirect to home or dashboard
+#     if 'user' in session:
+#         return redirect(url_for('main.dashboard'))
+#
+#     if request.method == 'POST':
+#         email = request.form.get('email')
+#         password1 = request.form.get('password1')
+#         password2 = request.form.get('password2')
+#
+#         # checking against existing email
+#         if User.query.filter_by(email=email).first():
+#             error = 'Email already registered'
+#         else:
+#             if password1 == password2:
+#                 user = User(email=email, password=password1)
+#                 db.session.add(user)
+#                 db.session.commit()
+#
+#                 # TO DO flash in html and dashboard change checking
+#                 flash("Sign up completed", "success")
+#                 # signing in
+#                 session['user'] = email
+#                 return redirect(url_for('main.dashboard'))
+#             else:
+#                 flash('Wrong values entered', "danger")
+#                 # return redirect("/dashboard")
+#
+#         # return redirect("/dashboard")
+#
+#     return redirect(url_for('main.dashboard'))
 
 #
 # @auth.route('/change-pass/', methods=['GET', 'POST'])

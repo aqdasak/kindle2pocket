@@ -37,39 +37,48 @@
             &nbsp;
         </header>
 
+
         <div id="login_container">
-            <form action="{{ url_for('auth.login') }}" method="post">
+
+            {% if 'user' not in session %}
+
+            <form action="{{ url_for('auth.login') }}" method="POST">
                 <input id="login" type="radio" name="tab" />
                 <label class="tab_label" for="login">log in</label>
                 <input id="signup" type="radio" name="tab" />
                 <label class="tab_label" for="signup">sign up</label>
                 <figure class="reveal_login">
                     <p>Please log in with your account.</p>
-                    <input type="text" placeholder="email" />
-                    <input type="password" placeholder="password" />
-                    <input id="logged_in" type="checkbox" />
-                    <label class="content_label" for="logged_in">Keep me logged in</label>
+                    <input type="email" placeholder="email" name="login_email" />
+                    <input type="password" placeholder="password" name="login_pass" />
+                    <!-- <input id="logged_in" type="checkbox"/>
+                    <label class="content_label" for="logged_in">Keep me logged in</label> -->
                     <input type="submit" value="Log in" />
                 </figure>
                 <figure class="reveal_signin">
                     <p>You can register a new account.</p>
-                    <input type="text" placeholder="email" />
-                    <input type="password" placeholder="password" />
-                    <input type="password" placeholder="confirm password" />
+                    <input type="email" placeholder="email" name="signup_email" />
+                    <input type="password" placeholder="password" name="signup_pass1" />
+                    <input type="password" placeholder="confirm password" name="signup_pass2" />
                     <input type="submit" value="Sign up" />
                 </figure>
             </form>
+
+            {% endif %}
+
         </div>
+
 
         <footer>
             <span>&copy 2020 aqdasak</span>
             <span>
                 <a href="https://github.com/aqdasak" target="_blank"><img
                         src="{{url_for('static', filename='icons/github.png')}}" alt="github" height="40px"></a>
-            
+
                 <a href="mailto:aqdasak@gmail.com"><img src="{{url_for('static', filename='icons/gmail.svg')}}"
                         alt="mail" height="40px"></a>
             </span>
         </footer>
 </body>
+
 </html>
