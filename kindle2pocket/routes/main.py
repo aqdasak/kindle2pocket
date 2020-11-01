@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, session, redirect, url_for
 from kindle2pocket.models import User
 from kindle2pocket.extensions import pocket
 
+from kindle2pocket.extensions import db
 # from config.config import params
 
 main = Blueprint('main', __name__)
@@ -22,7 +23,7 @@ def index(item_url=None):
         if 'token_step' in session and session['token_step'] == 2:
             pocket.get_access_token()
             user.access_token = pocket.access_token
-            user.session.commit()
+            db.session.commit()
             session.pop('token_step')
         # step 1
         elif not user.access_token:
