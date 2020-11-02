@@ -35,20 +35,20 @@
 <!--###########################-->
 
 
-<span id="main_container">
+<div id="main_container">
 
-        <header>
-            <img id="p2k" src="{{ url_for('static',filename='icons/p2k.png') }}">
-            <p>Save from kindle browser to your Pocket, for free.</p>
-            &nbsp;
-        </header>
+    <header>
+        <img id="p2k" src="{{ url_for('static',filename='icons/p2k.png') }}">
+        <p>Save from kindle browser to your Pocket, for free.</p>
+        &nbsp;
+    </header>
 
 
-        <div id="login_container">
+    <div id="login_container">
 
-            {% if 'user' not in session %}
+        {% if 'user' not in session %}
 
-                <form action="{{ url_for('auth.login') }}" method="POST">
+            <form action="{{ url_for('auth.login') }}" method="POST">
                 <input id="login" type="radio" name="tab"/>
                 <label class="tab_label" for="login">log in</label>
                 <input id="signup" type="radio" name="tab"/>
@@ -70,37 +70,38 @@
                 </figure>
             </form>
 
-            {% else %}
+        {% else %}
 
-                <div class="message">
-                    {{ session['show_item_url'] }} aDdEed to pocket
-                    <!-- Flash messages -->
-                    {% with messages=get_flashed_messages(with_categories=True) %}
-                        {% if messages %}
-                            {% for category,message in messages %}
-                                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            <div class="message">
+                <!-- Flash messages -->
+                {% with messages=get_flashed_messages(with_categories=True) %}
+                    {% if messages %}
+                        {% for category,message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
                                 <a href="{{ message }}" target="_blank">{{ message }}</a> added to pocket.
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
 
-                </div>
+            </div>
 
-            {% endif %}
+        {% endif %}
 
-        </div>
-</span>
+    </div>
+</div>
 
 <footer>
-    <span>&copy 2020 aqdasak</span>
-    <span>
+    <div>
+            <span>&copy 2020 aqdasak</span>
+            <span>
                 <a href="https://github.com/aqdasak" target="_blank"><img
                         src="{{ url_for('static', filename='icons/github.png') }}" alt="github" height="40px"></a>
 
                 <a href="mailto:aqdasak@gmail.com"><img src="{{ url_for('static', filename='icons/gmail.svg') }}"
                                                         alt="mail" height="40px"></a>
             </span>
+    </div>
 </footer>
 </body>
 </html>

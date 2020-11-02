@@ -20,7 +20,9 @@ body {
 form {
   position: relative;
   margin: auto;
-  width: 400px;
+  /*width: 400px;*/
+  width: 30vw;
+  min-width: 300px;
   background: #fff;
   border: 5px solid #ffa369;
   transition: all 300ms ease-in;
@@ -50,7 +52,8 @@ form input[id="login"]:checked ~ figure.reveal_login,
 form input[id="signup"]:checked ~ figure.reveal_signin{
   background: #ffa369;
   height: initial;
-  padding: 3em;
+  /*padding: 3em;*/
+  padding: 3vw;
   z-index: 10000000;
 }
 

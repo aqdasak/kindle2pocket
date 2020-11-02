@@ -6,7 +6,8 @@
 
 body {
     background-color: #ffd0b3;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Montserrat';
+    height: 100vh;
 }
 
 #user {
@@ -17,30 +18,31 @@ body {
 }
 
 #main_container {
-    height: 0.9vh;
+    /*height: 1vh;*/
 }
 
 header {
-    padding: 10px 250px;
-    height: 12rem;
+    /*padding: 10px 250px;*/
+    padding: 1vw;
+    height: 17vw;
 }
 
 header img {
     display: block;
     margin: auto;
-    width: 49rem;
+    width: 65vw;
     height: auto;
 }
 
 header p {
     color: white;
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 2.3vw;
     margin-top: 1.1rem;
 }
 
 #login_container {
-    height: 24rem;
+    height: 51vh;
 }
 
 .message {
@@ -54,9 +56,12 @@ header p {
     /*text-align: center;*/
 }
 
+footer {
+    position: sticky;
+    bottom: 0;
 }
 
-footer {
+footer div {
     display: flex;
     padding: 0rem 0.5rem;
     justify-content: space-between;
