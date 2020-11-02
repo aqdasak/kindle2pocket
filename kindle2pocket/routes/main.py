@@ -17,11 +17,13 @@ def index():
         # return render_template('index.html', show_item_url=show_item_url)
 
     is_access_token_required = False
-    if 'user' in session:
+    if 'user' in session and 'access_token' not in session:
         user = User.query.filter_by(email=session['user']).first()
 
         if not user.access_token:
             is_access_token_required = True
+        else:
+            session['access_token'] = True
 
     return render_template('index.html', is_access_token_required=is_access_token_required)
 
@@ -38,6 +40,7 @@ def access():
         pocket.get_access_token()
         user.access_token = pocket.access_token
         db.session.commit()
+        session['access_token'] = True
     return redirect(url_for('main.index'))
 
 
@@ -48,7 +51,6 @@ def add(item_url=None):
         user = User.query.filter_by(email=session['user']).first()
 
         if user.access_token:
-            user = User.query.filter_by(email=session['user']).first()
             pocket.access_token = user.access_token
             pocket.add_item(item_url)
 

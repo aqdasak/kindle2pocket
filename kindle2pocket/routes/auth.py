@@ -11,48 +11,48 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['POST'])
 def login():
-    if request.method == 'POST':
-        login_email = request.form.get('login_email')
-        login_password = request.form.get('login_pass')
+    login_email = request.form.get('login_email')
+    login_password = request.form.get('login_pass')
 
-        signup_email = request.form.get('signup_email')
-        signup_password1 = request.form.get('signup_pass1')
-        signup_password2 = request.form.get('signup_pass2')
+    signup_email = request.form.get('signup_email')
+    signup_password1 = request.form.get('signup_pass1')
+    signup_password2 = request.form.get('signup_pass2')
 
-        if login_email:
-            login_email = login_email.lower()
-            user = User.query.filter_by(email=login_email).first()
+    if login_email:
+        login_email = login_email.lower()
+        user = User.query.filter_by(email=login_email).first()
 
-            if user and check_password_hash(user.password, login_password):
-                session['user'] = login_email
+        if user and check_password_hash(user.password, login_password):
+            session['user'] = login_email
+        else:
+            flash('Could not login. Please check and try again.')
+
+    elif signup_email:
+        signup_email = signup_email.lower()
+        # checking against existing email
+        if User.query.filter_by(email=signup_email).first():
+            flash('Email already registered', 'danger')
+        else:
+            if signup_password1 == signup_password2:
+                user = User(email=signup_email, password=signup_password1)
+                db.session.add(user)
+                db.session.commit()
+
+                # TO DO flash in html and dashboard change checking
+                flash("Sign up completed", "success")
+                # signing in
+                session['user'] = signup_email
+
+                return redirect(url_for('main.index'))
             else:
-                flash('Could not login. Please check and try again.')
+                flash('Wrong values entered', "danger")
 
-        elif signup_email:
-            signup_email = signup_email.lower()
-            # checking against existing email
-            if User.query.filter_by(email=signup_email).first():
-                flash('Email already registered', 'danger')
-            else:
-                if signup_password1 == signup_password2:
-                    user = User(email=signup_email, password=signup_password1)
-                    db.session.add(user)
-                    db.session.commit()
+    # when user login after adding url
+    if 'item_url' in session and 'user' in session:
+        print('\n\n\n'+session['item_url']+'\n\n\n')
+        return redirect(url_for('main.add', item_url=session['item_url']))
 
-                    # TO DO flash in html and dashboard change checking
-                    flash("Sign up completed", "success")
-                    # signing in
-                    session['user'] = signup_email
-
-                    return redirect(url_for('main.index'))
-                else:
-                    flash('Wrong values entered', "danger")
-
-        # when user login after adding url
-        if 'item_url' in session and 'user' in session:
-            return redirect(url_for('main.add', item_url=session['item_url']))
-
-        return redirect(url_for('main.index'))
+    return redirect(url_for('main.index'))
 
 
 @auth.route('/logout/')
