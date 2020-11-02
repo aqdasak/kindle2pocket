@@ -49,7 +49,6 @@ def login():
 
     # when user login after adding url
     if 'item_url' in session and 'user' in session:
-        print('\n\n\n'+session['item_url']+'\n\n\n')
         return redirect(url_for('main.add', item_url=session['item_url']))
 
     return redirect(url_for('main.index'))

@@ -13,6 +13,7 @@ def index():
     if 'show_item_url' in session:
         # show_item_url = session['show_item_url']
         flash(session['show_item_url'], 'success')
+        print('\n\n\n'+session['show_item_url']+'\n\n\n')
         session.pop('show_item_url')
         # return render_template('index.html', show_item_url=show_item_url)
 
