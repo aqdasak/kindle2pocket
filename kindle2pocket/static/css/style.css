@@ -48,7 +48,7 @@ header p {
 
 .message {
     display: flex;
-    height: 51vh;
+    height: auto;
     justify-content: center;
     align-items: center;
     font-weight: bold;

@@ -52,7 +52,9 @@
                 {% if messages %}
                     {% for category,message in messages %}
                         <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {% autoescape false %}
                             {{ message }}
+                            {% autoescape %}
                         </div>
                     {% endfor %}
                 {% endif %}
