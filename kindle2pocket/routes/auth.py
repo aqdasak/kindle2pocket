@@ -21,11 +21,11 @@ def login():
 
         if login_email:
             login_email = login_email.lower()
-            # user = User.query.filter_by(email=login_email).first()
+            user = User.query.filter_by(email=login_email).first()
 
-            # if user and check_password_hash(user.password, login_pass):
+            if user and check_password_hash(user.password, login_password):
             ##########################
-            if login_password == 'qq':
+            # if login_password == 'qq':
                 session['user'] = login_email
             else:
                 flash('Could not login. Please check and try again.')

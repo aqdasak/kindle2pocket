@@ -25,18 +25,18 @@ class Pocket:
 
             response = requests.post(url=token_request_url, headers=headers, data=data)
 
-            # return response.json()['code']
+            self.request_token=response.json()['code']
+            print(self.request_token)
 
-            return response.json()['code']
-
-        def link_to_access_token(request_token, redirect_to='#'):
+        def link_to_access_token(redirect_to='#'):
             print('Inside request_access_token()')
 
-            redirect = 'https://getpocket.com/auth/authorize?request_token=' + request_token + '&redirect_uri=' + redirect_to
+            redirect = 'https://getpocket.com/auth/authorize?request_token=' + self.request_token + '&redirect_uri=' + redirect_to
             print(redirect)
             return redirect
 
-        link_to_access_token(get_request_token(), redirect_to)
+        get_request_token()
+        return link_to_access_token(redirect_to)
 
     def get_access_token(self):
         print('Inside get_access_token()')
@@ -46,7 +46,6 @@ class Pocket:
 
         authorization_url = 'https://getpocket.com/v3/oauth/authorize'
         response = requests.post(url=authorization_url, headers=headers, data=data)
-        # return response.json()['access_token']
 
         self.access_token = response.json()['access_token']
 
@@ -64,9 +63,12 @@ class Pocket:
         print(response.headers)
         print(response.text)
 
-    # rt = get_request_token()
-    # print(rt)
-    # at = get_access_token(rt)['access_token']
-    # print(at)
 
-    # add_item(consumer_key, at, r'https://coderg.herokuapp.com')
+if __name__ == '__main__':
+    ob = Pocket()
+    rt = ob.request_access_token()
+    # print('Click =',rt)
+    import time
+    time.sleep(10)
+    ob.get_access_token()
+    ob.add_item(r'https://www.google.com')
