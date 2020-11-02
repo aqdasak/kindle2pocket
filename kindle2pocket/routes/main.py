@@ -12,21 +12,26 @@ main = Blueprint('main', __name__)
 def index():
     if 'show_item_url' in session:
         # show_item_url = session['show_item_url']
-        flash(session['show_item_url'], 'success')
-        print('\n\n\n'+session['show_item_url']+'\n\n\n')
+        message = '<a href = "' + session['show_item_url'] + '" target = "_blank" >' + session[
+            'show_item_url'] + '</a>' + ' added to pocket.'
+        flash(message, 'success')
+        # print('\n\n\n' + session['show_item_url'] + '\n\n\n')
         session.pop('show_item_url')
         # return render_template('index.html', show_item_url=show_item_url)
 
-    is_access_token_required = False
+    # is_access_token_required = False
     if 'user' in session and 'access_token' not in session:
         user = User.query.filter_by(email=session['user']).first()
 
         if not user.access_token:
-            is_access_token_required = True
+            # is_access_token_required = True
+            message = '<a href = "'+url_for("main.request_access_token")+'" > Authorize </a>'
+            flash(message, 'danger')
         else:
             session['access_token'] = True
 
-    return render_template('index.html', is_access_token_required=is_access_token_required)
+    # return render_template('index.html', is_access_token_required=is_access_token_required)
+    return render_template('index.html')
 
 
 @main.route('/request')

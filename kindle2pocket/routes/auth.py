@@ -43,7 +43,7 @@ def login():
                 # signing in
                 session['user'] = signup_email
 
-                return redirect(url_for('main.index'))
+                # return redirect(url_for('main.index'))
             else:
                 flash('Wrong values entered', "danger")
 

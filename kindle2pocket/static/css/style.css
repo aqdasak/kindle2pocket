@@ -18,13 +18,14 @@ body {
 }
 
 #main_container {
-    /*height: 1vh;*/
+    height: 90vh;
 }
 
 header {
     /*padding: 10px 250px;*/
-    padding: 1vw;
-    height: 17vw;
+    height: 30vh;
+    padding: 5vh 1vw;
+    margin: 1vh 0vw;;
 }
 
 header img {
@@ -47,7 +48,7 @@ header p {
 
 .message {
     display: flex;
-    height: 17rem;
+    height: 51vh;
     justify-content: center;
     align-items: center;
     font-weight: bold;
