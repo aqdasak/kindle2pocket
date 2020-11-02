@@ -57,6 +57,8 @@ def add(item_url=None):
             # return 'Added '+item_url
         else:
             return redirect(url_for('main.request_access_token'))
+    else:
+        return redirect(url_for('auth.login'))
 
     return redirect(url_for('main.index'))
 
