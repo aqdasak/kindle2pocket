@@ -1,3 +1,3 @@
 params = {
-    'domain': 'https://k2p.herokuapp.com/'
+    'domain': 'https://k2p.herokuapp.com'
 }

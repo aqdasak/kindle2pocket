@@ -27,9 +27,10 @@ class Pocket:
 
             self.request_token=response.json()['code']
             print(self.request_token)
+            # print(response.text)
 
         def link_to_access_token(redirect_to='#'):
-            print('Inside request_access_token()')
+            print('Inside link_to_access_token()')
 
             redirect = 'https://getpocket.com/auth/authorize?request_token=' + self.request_token + '&redirect_uri=' + redirect_to
             print(redirect)
