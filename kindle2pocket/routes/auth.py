@@ -24,9 +24,6 @@ def login():
             user = User.query.filter_by(email=login_email).first()
 
             if user and check_password_hash(user.password, login_password):
-            ##########################
-            # if login_password == 'qq':
-                print('\n\n==LOGGED==\n\n')
                 session['user'] = login_email
             else:
                 flash('Could not login. Please check and try again.')
@@ -58,39 +55,6 @@ def logout():
     session.pop('user')
     return redirect(url_for('main.index'))
 
-# @auth.route("/signup/", methods=['GET', 'POST'])
-# def signup():
-#     # if user/admin already logged in
-#     # then redirect to home or dashboard
-#     if 'user' in session:
-#         return redirect(url_for('main.dashboard'))
-#
-#     if request.method == 'POST':
-#         email = request.form.get('email')
-#         password1 = request.form.get('password1')
-#         password2 = request.form.get('password2')
-#
-#         # checking against existing email
-#         if User.query.filter_by(email=email).first():
-#             error = 'Email already registered'
-#         else:
-#             if password1 == password2:
-#                 user = User(email=email, password=password1)
-#                 db.session.add(user)
-#                 db.session.commit()
-#
-#                 # TO DO flash in html and dashboard change checking
-#                 flash("Sign up completed", "success")
-#                 # signing in
-#                 session['user'] = email
-#                 return redirect(url_for('main.dashboard'))
-#             else:
-#                 flash('Wrong values entered', "danger")
-#                 # return redirect("/dashboard")
-#
-#         # return redirect("/dashboard")
-#
-#     return redirect(url_for('main.dashboard'))
 
 #
 # @auth.route('/change-pass/', methods=['GET', 'POST'])
@@ -173,20 +137,3 @@ def logout():
 #         return render_template('forgot_pass/reset_pass.html', username=user.username)
 #
 #     return render_template('forgot_pass/send_otp.html')
-
-##################
-# @auth.route('/role/', methods=['GET', 'POST'])
-# def role():
-#     if request.method == 'POST':
-#         username = request.form.get('username')
-#
-#         # getting roles from html form
-#         new_roles = []
-#         for i in range(10):
-#             n_role = request.form.get('role' + str(i + 1))
-#             new_roles.append(n_role)
-#
-#         change_role(username, *new_roles)
-#
-#     users = User.query.all()
-#     return render_template('role.html', users=users, roles_avl=roles_avl)

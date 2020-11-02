@@ -29,7 +29,7 @@
     {% endif %}
 
     {% if 'user' in session %}
-        {{ session['user'] }}
+        <a href="{{ url_for('auth.logout') }}">{{ session['user'] }}</a>
     {% else %}
         email of logged in user via flask
     {% endif %}
@@ -74,19 +74,22 @@
 
             {% endif %}
 
+            {% if show_item_url %}
+                Added {{ session['show_item_url'] }}
+            {% endif %}
+
         </div>
+</span>
 
-
-        <footer>
-            <span>&copy 2020 aqdasak</span>
-            <span>
+<footer>
+    <span>&copy 2020 aqdasak</span>
+    <span>
                 <a href="https://github.com/aqdasak" target="_blank"><img
                         src="{{ url_for('static', filename='icons/github.png') }}" alt="github" height="40px"></a>
 
                 <a href="mailto:aqdasak@gmail.com"><img src="{{ url_for('static', filename='icons/gmail.svg') }}"
                                                         alt="mail" height="40px"></a>
             </span>
-        </footer>
+</footer>
 </body>
-
 </html>
