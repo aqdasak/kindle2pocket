@@ -41,6 +41,11 @@ header p {
   height: 24rem;
 }
 
+.message{
+  text-align: center;
+
+}
+
 footer {
   display: flex;
   padding: 0rem 0.5rem;

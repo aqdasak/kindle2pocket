@@ -43,6 +43,12 @@ def login():
                     flash("Sign up completed", "success")
                     # signing in
                     session['user'] = signup_email
+
+                    ################# when user login after adding url
+                    ################# this will be redone by redirect to decorator
+                    if 'item_url' in session:
+                        return redirect(url_for('main.add', item_url=session['item_url']))
+
                     return redirect(url_for('main.index'))
                 else:
                     flash('Wrong values entered', "danger")
@@ -52,9 +58,9 @@ def login():
 
 @auth.route('/logout/')
 def logout():
-    session.pop('user')
+    # session.pop('user')
+    session.clear()
     return redirect(url_for('main.index'))
-
 
 #
 # @auth.route('/change-pass/', methods=['GET', 'POST'])

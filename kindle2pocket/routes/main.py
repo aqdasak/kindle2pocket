@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, redirect, url_for
+from flask import Blueprint, render_template, session, redirect, url_for, flash
 
 from kindle2pocket.models import User
 from kindle2pocket.extensions import pocket, db
@@ -11,7 +11,10 @@ main = Blueprint('main', __name__)
 @main.route('/', methods=['GET', 'POST'])
 def index():
     if 'show_item_url' in session:
-        return render_template('index.html', show_item_url=session['show_item_url'])
+        # show_item_url = session['show_item_url']
+        flash(session['show_item_url'], 'success')
+        session.pop('show_item_url')
+        # return render_template('index.html', show_item_url=show_item_url)
 
     is_access_token_required = False
     if 'user' in session:
