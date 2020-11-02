@@ -24,6 +24,10 @@
 
 <!--########################-->
 <div id="user">
+    {% if is_access_token_required %}
+        <a href="{{ url_for('main.request_access_token') }}">Authorize</a>
+    {% endif %}
+
     {% if 'user' in session %}
         {{ session['user'] }}
     {% else %}

@@ -65,11 +65,11 @@ class Pocket:
         print(response.text)
 
 
-if __name__ == '__main__':
-    ob = Pocket()
-    rt = ob.request_access_token()
-    # print('Click =',rt)
-    import time
-    time.sleep(10)
-    ob.get_access_token()
-    ob.add_item(r'https://www.google.com')
+# if __name__ == '__main__':
+#     ob = Pocket()
+#     rt = ob.request_access_token()
+#     # print('Click =',rt)
+#     import time
+#     time.sleep(10)
+#     ob.get_access_token()
+#     ob.add_item(r'https://www.google.com')

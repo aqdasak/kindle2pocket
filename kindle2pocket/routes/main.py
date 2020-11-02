@@ -11,24 +11,27 @@ main = Blueprint('main', __name__)
 
 
 @main.route('/', methods=['GET', 'POST'])
-@main.route('/<path:item_url>', methods=['GET', 'POST'])
-def index(item_url=None):
-    if item_url:
-        session['item_url'] = item_url
-
+def index():
+    is_access_token_required = False
     if 'user' in session:
         user = User.query.filter_by(email=session['user']).first()
 
         if not user.access_token:
-            return redirect(pocket.request_access_token(redirect_to=params['domain']+'/access'))
+            is_access_token_required = True
+            # return redirect(pocket.request_access_token(redirect_to=params['domain']+'/access'))
             # return redirect(pocket.request_access_token(redirect_to='http://127.0.0.1:5000//access'))
 
-        else:
-            pocket.access_token = user.access_token
-            pocket.add_item(session['item_url'])
-            return 'OK 4'
+        # else:
+        #     pocket.access_token = user.access_token
+        #     pocket.add_item(session['item_url'])
+        #     return 'OK 4'
 
-    return render_template('index.html')
+    return render_template('index.html', is_access_token_required=is_access_token_required)
+
+
+@main.route('/request')
+def request_access_token():
+    return redirect(pocket.request_access_token(redirect_to=params['domain'] + '/access'))
 
 
 @main.route('/access', methods=['GET', 'POST'])
@@ -42,6 +45,18 @@ def access():
         user.access_token = pocket.access_token
         db.session.commit()
     return render_template('index.html')
+
+
+@main.route('/<path:item_url>', methods=['GET', 'POST'])
+def add(item_url=None):
+    if 'user' in session:
+        user = User.query.filter_by(email=session['user']).first()
+        pocket.access_token = user.access_token
+        pocket.add_item(session['item_url'])
+        return 'OK 4'
+
+    return render_template('index.html')
+
 
 # if __name__ == '__main__':
     # redirect(pocket.request_access_token(redirect_to=params['domain'] + '/access'))
