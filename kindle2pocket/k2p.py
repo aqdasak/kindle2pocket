@@ -25,9 +25,9 @@ class Pocket:
 
             response = requests.post(url=token_request_url, headers=headers, data=data)
 
-            self.request_token=response.json()['code']
-            print(self.request_token)
-            # print(response.text)
+            # self.request_token=response.json()['code']
+            # print(self.request_token)
+            print(response.text)
 
         def link_to_access_token(redirect_to='#'):
             print('Inside link_to_access_token()')
