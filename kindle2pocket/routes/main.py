@@ -21,10 +21,10 @@ def index(item_url=None):
         # getting access token
         # step 2
         if 'token_step' in session and session['token_step'] == 2:
+            session.pop('token_step')
             pocket.get_access_token()
             user.access_token = pocket.access_token
             db.session.commit()
-            session.pop('token_step')
         # step 1
         elif not user.access_token:
             session['token_step'] = 2
