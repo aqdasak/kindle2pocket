@@ -44,14 +44,13 @@ def login():
                     # signing in
                     session['user'] = signup_email
 
-                    ################# when user login after adding url
-                    ################# this will be redone by redirect to decorator
-                    if 'item_url' in session:
-                        return redirect(url_for('main.add', item_url=session['item_url']))
-
                     return redirect(url_for('main.index'))
                 else:
                     flash('Wrong values entered', "danger")
+
+        # when user login after adding url
+        if 'item_url' in session and 'user' in session:
+            return redirect(url_for('main.add', item_url=session['item_url']))
 
         return redirect(url_for('main.index'))
 
