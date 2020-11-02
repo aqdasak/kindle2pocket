@@ -33,7 +33,6 @@ def index(item_url=None):
 
 @main.route('/access', methods=['GET', 'POST'])
 def access():
-    return str(pocket.request_token)
     if 'user' in session:
         user = User.query.filter_by(email=session['user']).first()
 
