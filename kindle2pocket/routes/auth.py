@@ -26,6 +26,7 @@ def login():
             if user and check_password_hash(user.password, login_password):
             ##########################
             # if login_password == 'qq':
+                print('\n\n==LOGGED==\n\n')
                 session['user'] = login_email
             else:
                 flash('Could not login. Please check and try again.')
@@ -55,7 +56,7 @@ def login():
 @auth.route('/logout/')
 def logout():
     session.pop('user')
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('main.index'))
 
 # @auth.route("/signup/", methods=['GET', 'POST'])
 # def signup():
