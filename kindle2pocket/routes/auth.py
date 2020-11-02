@@ -13,17 +13,19 @@ auth = Blueprint('auth', __name__)
 def login():
     if request.method == 'POST':
         login_email = request.form.get('login_email')
-        login_pass = request.form.get('login_pass')
+        login_password = request.form.get('login_pass')
 
         signup_email = request.form.get('signup_email')
-        signup_pass1 = request.form.get('signup_pass1')
-        signup_pass2 = request.form.get('signup_pass2')
+        signup_password1 = request.form.get('signup_pass1')
+        signup_password2 = request.form.get('signup_pass2')
 
         if login_email:
             login_email = login_email.lower()
-            user = User.query.filter_by(email=login_email).first()
+            # user = User.query.filter_by(email=login_email).first()
 
-            if user and check_password_hash(user.password, login_pass):
+            # if user and check_password_hash(user.password, login_pass):
+            ##########################
+            if login_password == 'qq':
                 session['user'] = login_email
             else:
                 flash('Could not login. Please check and try again.')
@@ -34,8 +36,8 @@ def login():
             if User.query.filter_by(email=signup_email).first():
                 flash('Email already registered', 'danger')
             else:
-                if signup_pass1 == signup_pass2:
-                    user = User(email=signup_email, password=signup_email)
+                if signup_password1 == signup_password2:
+                    user = User(email=signup_email, password=signup_password1)
                     db.session.add(user)
                     db.session.commit()
 

@@ -13,7 +13,7 @@ main = Blueprint('main', __name__)
 @main.route('/<path:item_url>', methods=['GET', 'POST'])
 def index(item_url=None):
     if item_url:
-        session['item_url'] = item_url
+        session['item_url'] =item_url
         
     if 'user' in session:
         user = User.query.filter_by(email=session['user']).first()

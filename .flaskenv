@@ -1,2 +1,2 @@
 FLASK_ENV=development
-FLASK_APP=k2p
+FLASK_APP=kindle2pocket
