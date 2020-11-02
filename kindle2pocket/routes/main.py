@@ -44,23 +44,23 @@ def access():
         pocket.get_access_token()
         user.access_token = pocket.access_token
         db.session.commit()
-    return render_template('index.html')
+    return redirect(url_for('main.index'))
 
 
 @main.route('/<path:item_url>', methods=['GET', 'POST'])
 def add(item_url=None):
+    session['item_url'] = item_url
     if 'user' in session:
         user = User.query.filter_by(email=session['user']).first()
         pocket.access_token = user.access_token
         pocket.add_item(session['item_url'])
-        return 'OK 4'
+        return 'Added'+session['item_url']
 
-    return render_template('index.html')
-
+    return redirect(url_for('main.index'))
 
 # if __name__ == '__main__':
-    # redirect(pocket.request_access_token(redirect_to=params['domain'] + '/access'))
-    # pocket.request_token='ffa0ec46-7bb0-2245-61cf-1a4608'
-    # pocket.get_access_token()
-    # pocket.access_token = '59b190fa-0ae2-dda1-5005-48dd04'
-    # pocket.add_item('https://www.youtube.com')
+# redirect(pocket.request_access_token(redirect_to=params['domain'] + '/access'))
+# pocket.request_token='ffa0ec46-7bb0-2245-61cf-1a4608'
+# pocket.get_access_token()
+# pocket.access_token = '59b190fa-0ae2-dda1-5005-48dd04'
+# pocket.add_item('https://www.youtube.com')
