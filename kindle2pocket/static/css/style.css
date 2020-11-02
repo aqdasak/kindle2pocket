@@ -1,60 +1,71 @@
 /* CSS RESET */
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  background-color: #ffd0b3;
-  font-family: "Open Sans", sans-serif;
+    background-color: #ffd0b3;
+    font-family: "Open Sans", sans-serif;
 }
 
 #user {
-  color: #ffa369;
-  font-weight: bold;
-  text-align: right;
-  padding: 0.3rem 0.5rem;
+    color: #ffa369;
+    font-weight: bold;
+    text-align: right;
+    padding: 0.3rem 0.5rem;
 }
 
 #main_container {
-  height: 0.9vh;
+    height: 0.9vh;
 }
 
 header {
-  padding: 10px 250px;
-  height: 12rem;
+    padding: 10px 250px;
+    height: 12rem;
 }
+
 header img {
-  display: block;
-  margin: auto;
-  width: 49rem;
-  height: auto;
+    display: block;
+    margin: auto;
+    width: 49rem;
+    height: auto;
 }
+
 header p {
-  color: white;
-  text-align: center;
-  font-size: 1.6rem;
-  margin-top: 1.1rem;
+    color: white;
+    text-align: center;
+    font-size: 1.6rem;
+    margin-top: 1.1rem;
 }
 
 #login_container {
-  height: 24rem;
+    height: 24rem;
 }
 
-.message{
-  text-align: center;
+.message {
+    display: flex;
+    height: 17rem;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #f29100;
+    /*text-align: center;*/
+}
 
 }
 
 footer {
-  display: flex;
-  padding: 0rem 0.5rem;
-  justify-content: space-between;
-  align-items: flex-end;
-  font-weight: bold;
+    display: flex;
+    padding: 0rem 0.5rem;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-weight: bold;
 }
+
 footer img {
-  width: 1.8rem;
-  height: auto;
-  margin: 0rem 0.2rem;
+    width: 1.8rem;
+    height: auto;
+    margin: 0rem 0.2rem;
 }

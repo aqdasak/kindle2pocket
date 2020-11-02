@@ -71,7 +71,7 @@
             </form>
 
             {% else %}
-                {#                {% if show_item_url %}#}
+
                 <div class="message">
                     {{ session['show_item_url'] }} aDdEed to pocket
                     <!-- Flash messages -->
@@ -79,17 +79,14 @@
                         {% if messages %}
                             {% for category,message in messages %}
                                 <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-    {{ message }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+                                <a href="{{ message }}" target="_blank">{{ message }}</a> added to pocket.
+                                </div>
                             {% endfor %}
                         {% endif %}
                     {% endwith %}
 
-                    </div>
-                {#                {% endif %}#}
+                </div>
+
             {% endif %}
 
         </div>
