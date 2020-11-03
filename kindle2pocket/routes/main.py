@@ -13,11 +13,16 @@ def index():
     if 'show_item_url' in session:
         # show_item_url = session['show_item_url']
         message = '<a href = "' + session['show_item_url'] + '" target = "_blank" >' + session[
-            'show_item_url'] + '</a>' + ' added to pocket.'
+            'show_item_url'] + '</a>' + ' added to pocket.<br>'
         flash(message, 'success')
         # print('\n\n\n' + session['show_item_url'] + '\n\n\n')
         session.pop('show_item_url')
         # return render_template('index.html', show_item_url=show_item_url)
+
+    # when user signed up and authorised after adding url
+    # adding after login is handled by 'auth.login()'
+    if 'item_url' in session and 'user' in session and 'access_token' in session:
+        return redirect(url_for('main.add', item_url=session['item_url']))
 
     # is_access_token_required = False
     if 'user' in session and 'access_token' not in session:
@@ -25,7 +30,7 @@ def index():
 
         if not user.access_token:
             # is_access_token_required = True
-            message = '<a href = "'+url_for("main.request_access_token")+'" > Authorize </a>'
+            message = '<a href = "'+url_for("main.request_access_token")+'" > Authorize </a><br>'
             flash(message, 'danger')
         else:
             session['access_token'] = True

@@ -25,13 +25,13 @@ def login():
         if user and check_password_hash(user.password, login_password):
             session['user'] = login_email
         else:
-            flash('Could not login. Please check and try again.')
+            flash('Could not login. Please check and try again.<br>')
 
     elif signup_email:
         signup_email = signup_email.lower()
         # checking against existing email
         if User.query.filter_by(email=signup_email).first():
-            flash('Email already registered', 'danger')
+            flash('Email already registered.<br>', 'danger')
         else:
             if signup_password1 == signup_password2:
                 user = User(email=signup_email, password=signup_password1)
@@ -39,17 +39,22 @@ def login():
                 db.session.commit()
 
                 # TO DO flash in html and dashboard change checking
-                flash("Sign up completed", "success")
+                flash("Sign up completed<br>", "success")
                 # signing in
                 session['user'] = signup_email
 
                 # return redirect(url_for('main.index'))
             else:
-                flash('Wrong values entered', "danger")
+                flash('Wrong values entered<br>', "danger")
 
-    # when user login after adding url
+    # when user logged in after adding url
     if 'item_url' in session and 'user' in session:
-        return redirect(url_for('main.add', item_url=session['item_url']))
+        if 'access_token' in session:
+            return redirect(url_for('main.add', item_url=session['item_url']))
+        # when user signed up after adding url, they must authorise the account
+        # this is handled by 'main.index()'
+        else:
+            flash('Authorise your pocket account<br>', 'danger')
 
     return redirect(url_for('main.index'))
 

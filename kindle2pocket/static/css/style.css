@@ -11,10 +11,26 @@ body {
 }
 
 #user {
+    height: 30px;
     color: #ffa369;
     font-weight: bold;
-    text-align: right;
+    /*text-align: right;*/
     padding: 0.3rem 0.5rem;
+    display: flex;
+    justify-content: end;
+}
+
+#user a {
+    margin-left: 5px;
+    padding-left: 7px;
+}
+
+#user img {
+    width: 16px;
+    height: auto;
+    position: relative;
+    z-index: 10;
+    padding-top: 2px;
 }
 
 #main_container {
